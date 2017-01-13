@@ -1,6 +1,7 @@
 # Anti-Duplicator
 
-[TODO. There will be project description]
+Script search and display duplicates in folder.
+Script get folder in which you want to remove duplicates and display all duplicate files with file path.
 
 # Project Goals
 
