@@ -1,10 +1,15 @@
 import os
+from collections import defaultdict
+from collections import namedtuple
+
+FileInfo = namedtuple('FileInfo', ['name', 'size'])
+
+# data structure :
+# {(FileInfo('file1_name','file1_size'):[file1_path_1,file1_path_2],FileInfo('file2_name','file2_size'):[file2_path_1]}
 
 
 def search_dublicates(path):
-    # data structure :
-    # {'file1_name/file1_size': [file1_path_1, file1_path_2], 'file2_name/file2_size': [file2_path_1]}
-    file_dict_by_name_size_path = {}
+    file_dict_by_name_size_path = defaultdict(list)
     for dir_path, dirs, files in os.walk(path):
         for file_name in files:
             file_path = os.path.join(dir_path, file_name)
@@ -12,6 +17,7 @@ def search_dublicates(path):
             file_name_size_key = str(file_name) + '/' + str(file_size)
             if file_name_size_key not in file_dict_by_name_size_path:
                 file_dict_by_name_size_path[file_name_size_key] = [file_path]
+                d[(file.name, file.size)].append(path)
             else:
                 file_dict_by_name_size_path[file_name_size_key].append(file_path)
     return [file_info for file_info in file_dict_by_name_size_path.items() if len(file_info[1]) > 1]
