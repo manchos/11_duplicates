@@ -3,7 +3,7 @@ import argparse
 from collections import defaultdict
 from collections import namedtuple
 
-FileInfo = namedtuple('FileInfo', ['name', 'size'])
+file_info_class = namedtuple('FileInfo', ['name', 'size'])
 
 # data structure :
 # {(FileInfo('file1_name','file1_size'):[file1_path_1,file1_path_2],FileInfo('file2_name','file2_size'):[file2_path_1]}
@@ -15,7 +15,7 @@ def search_dublicates(path):
         for file_name in files:
             file_path = os.path.join(dir_path, file_name)
             file_size = os.path.getsize(file_path)
-            file_dict_by_name_size_path[FileInfo(file_name, file_size)].append(file_path)
+            file_dict_by_name_size_path[file_info_class(file_name, file_size)].append(file_path)
     return dict(file_info for file_info in file_dict_by_name_size_path.items() if len(file_info[1]) > 1)
 
 
