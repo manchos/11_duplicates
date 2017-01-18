@@ -8,7 +8,7 @@ Script get folder in which you want to remove duplicates and display all duplica
 
 Run the script note the directory path
 ```#!bash
-$ python duplicates.py <path to file>
+$ python duplicates.py -d/--dir <path to file>
 ```
 and get duplicates like this:
 ```#!bash
