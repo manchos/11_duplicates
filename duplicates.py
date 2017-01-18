@@ -1,4 +1,5 @@
 import os
+import argparse
 from collections import defaultdict
 from collections import namedtuple
 
@@ -25,13 +26,18 @@ def print_duplicates_to_terminal(duplicates):
             print(path)
 
 
-if __name__ == '__main__':
+def directory(raw_path):
+    if not os.path.isdir(raw_path):
+        raise argparse.ArgumentTypeError('"{}" is not an existing directory'.format(raw_path))
+    return os.path.abspath(raw_path)
 
-    dir_path = input('Enter the real path to directory name: ')
-    if not os.path.exists(dir_path):
-        print('Folder not fount')
-        exit()
-    duplicates_list = search_dublicates(dir_path)
+
+if __name__ == '__main__':
+    parser = argparse.ArgumentParser(description="Get duplicated files")
+    parser.add_argument("-d", "--dir", type=directory, dest="dir", required=True)
+    args = parser.parse_args()
+    duplicates_list = search_dublicates(args.dir)
     print('Found {0} duplicates:'.format(len(duplicates_list)))
     print_duplicates_to_terminal(duplicates_list)
+
 
