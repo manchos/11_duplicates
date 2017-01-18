@@ -12,6 +12,7 @@ $ python duplicates.py <path to file>
 ```
 and get duplicates like this:
 ```#!bash
+
 Found n duplicates:
 File: file_1 found in:
 /file_path/file_1
